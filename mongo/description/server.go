@@ -403,7 +403,7 @@ func decodeStringMap(element bson.RawElement, name string) (map[string]string, e
 	if err != nil {
 		return nil, err
 	}
-	m := make(map[string]string)
+	m := make(map[string]string, len(elements))
 	for _, element := range elements {
 		key := element.Key()
 		value, ok := element.Value().StringValueOK()

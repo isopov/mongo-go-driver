@@ -137,7 +137,7 @@ func (a *AutoEncryptionOptions) SetExtraOptions(extraOpts map[string]interface{}
 //
 // This should only be used to set custom TLS configurations. By default, the connection will use an empty tls.Config{} with MinVersion set to tls.VersionTLS12.
 func (a *AutoEncryptionOptions) SetTLSConfig(tlsOpts map[string]*tls.Config) *AutoEncryptionOptions {
-	tlsConfigs := make(map[string]*tls.Config)
+	tlsConfigs := make(map[string]*tls.Config, len(tlsOpts))
 	for provider, config := range tlsOpts {
 		// use TLS min version 1.2 to enforce more secure hash algorithms and advanced cipher suites
 		if config.MinVersion == 0 {

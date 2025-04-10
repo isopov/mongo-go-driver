@@ -18,7 +18,7 @@ type hostlistDiff struct {
 func diffHostList(t description.Topology, hostlist []string) hostlistDiff {
 	var diff hostlistDiff
 
-	oldServers := make(map[string]bool)
+	oldServers := make(map[string]bool, len(t.Servers))
 	for _, s := range t.Servers {
 		oldServers[s.Addr.String()] = true
 	}
@@ -48,7 +48,7 @@ type topologyDiff struct {
 func diffTopology(old, new description.Topology) topologyDiff {
 	var diff topologyDiff
 
-	oldServers := make(map[string]bool)
+	oldServers := make(map[string]bool, len(old.Servers))
 	for _, s := range old.Servers {
 		oldServers[s.Addr.String()] = true
 	}

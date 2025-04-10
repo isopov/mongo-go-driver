@@ -38,12 +38,12 @@ func (t Topology) Equal(other Topology) bool {
 		return false
 	}
 
-	topoServers := make(map[string]Server)
+	topoServers := make(map[string]Server, len(t.Servers))
 	for _, s := range t.Servers {
 		topoServers[s.Addr.String()] = s
 	}
 
-	otherServers := make(map[string]Server)
+	otherServers := make(map[string]Server, len(t.Servers))
 	for _, s := range other.Servers {
 		otherServers[s.Addr.String()] = s
 	}

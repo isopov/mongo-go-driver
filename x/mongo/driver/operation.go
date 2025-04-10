@@ -343,7 +343,7 @@ func filterDeprioritizedServers(candidates, deprioritized []description.Server) 
 		return candidates
 	}
 
-	dpaSet := make(map[address.Address]*description.Server)
+	dpaSet := make(map[address.Address]*description.Server, len(deprioritized))
 	for i, srv := range deprioritized {
 		dpaSet[srv.Addr] = &deprioritized[i]
 	}

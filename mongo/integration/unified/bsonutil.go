@@ -31,7 +31,7 @@ func removeFieldsFromDocument(doc bson.Raw, keys ...string) bson.Raw {
 	newDoc := bsoncore.NewDocumentBuilder()
 	elems, _ := doc.Elements()
 
-	keysMap := make(map[string]struct{})
+	keysMap := make(map[string]struct{}, len(keys))
 	for _, key := range keys {
 		keysMap[key] = struct{}{}
 	}
@@ -50,7 +50,7 @@ func removeFieldsFromDocument(doc bson.Raw, keys ...string) bson.Raw {
 func sortDocument(doc bson.Raw) bson.Raw {
 	elems, _ := doc.Elements()
 	keys := make([]string, 0, len(elems))
-	valuesMap := make(map[string]bson.RawValue)
+	valuesMap := make(map[string]bson.RawValue, len(elems))
 
 	for _, elem := range elems {
 		keys = append(keys, elem.Key())

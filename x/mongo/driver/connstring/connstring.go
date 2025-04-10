@@ -352,8 +352,8 @@ func (u *ConnString) addOptions(connectionArgPairs []string) error {
 		case "authmechanism":
 			u.AuthMechanism = value
 		case "authmechanismproperties":
-			u.AuthMechanismProperties = make(map[string]string)
 			pairs := strings.Split(value, ",")
+			u.AuthMechanismProperties = make(map[string]string, len(pairs))
 			for _, pair := range pairs {
 				kv := strings.SplitN(pair, ":", 2)
 				if len(kv) != 2 || kv[0] == "" {
@@ -490,8 +490,8 @@ func (u *ConnString) addOptions(connectionArgPairs []string) error {
 				break
 			}
 
-			tags := make(map[string]string)
 			items := strings.Split(value, ",")
+			tags := make(map[string]string, len(items))
 			for _, item := range items {
 				parts := strings.Split(item, ":")
 				if len(parts) != 2 {

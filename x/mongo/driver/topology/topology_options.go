@@ -58,7 +58,7 @@ func newLogger(opts *options.LoggerOptions) (*logger.Logger, error) {
 		opts = options.Logger()
 	}
 
-	componentLevels := make(map[logger.Component]logger.Level)
+	componentLevels := make(map[logger.Component]logger.Level, len(opts.ComponentLevels))
 	for component, level := range opts.ComponentLevels {
 		componentLevels[logger.Component(component)] = logger.Level(level)
 	}

@@ -544,7 +544,7 @@ func (c *Client) configureMetadataClientFLE(clientOpts *options.ClientOptions) e
 
 func (c *Client) newMongoCrypt(opts *options.AutoEncryptionOptions) (*mongocrypt.MongoCrypt, error) {
 	// convert schemas in SchemaMap to bsoncore documents
-	cryptSchemaMap := make(map[string]bsoncore.Document)
+	cryptSchemaMap := make(map[string]bsoncore.Document, len(opts.SchemaMap))
 	for k, v := range opts.SchemaMap {
 		schema, err := marshal(v, c.bsonOpts, c.registry)
 		if err != nil {
@@ -554,7 +554,7 @@ func (c *Client) newMongoCrypt(opts *options.AutoEncryptionOptions) (*mongocrypt
 	}
 
 	// convert schemas in EncryptedFieldsMap to bsoncore documents
-	cryptEncryptedFieldsMap := make(map[string]bsoncore.Document)
+	cryptEncryptedFieldsMap := make(map[string]bsoncore.Document, len(opts.EncryptedFieldsMap))
 	for k, v := range opts.EncryptedFieldsMap {
 		encryptedFields, err := marshal(v, c.bsonOpts, c.registry)
 		if err != nil {
@@ -868,7 +868,7 @@ func newLogger(opts *options.LoggerOptions) (*logger.Logger, error) {
 	}
 
 	// Otherwise, collect the component-level options and create a logger.
-	componentLevels := make(map[logger.Component]logger.Level)
+	componentLevels := make(map[logger.Component]logger.Level, len(opts.ComponentLevels))
 	for component, level := range opts.ComponentLevels {
 		componentLevels[logger.Component(component)] = logger.Level(level)
 	}
